@@ -3,7 +3,6 @@ from flask import Flask, flash, request, redirect, url_for, render_template
 # request
 from werkzeug.utils import secure_filename
 # ファイル名をチェック
-import numpy as np
 import cv2
 from datetime import datetime as dt
 

@@ -1,0 +1,38 @@
+.preview {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    display: block;
+    width: 40vw;
+    max-width: 330px;
+    height: 40vw;
+    max-height: 330px;
+    border-radius: 50%;
+    background: url('/static/images/photo.jpeg') no-repeat center;
+    background-size: 40vw 40vw;
+}
+
+input[type=file] {
+    display: none;
+}
+
+
+.submit{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  display: block;
+  width: 15vw;
+  max-width: 150px;
+  height: 15vw;
+  max-height: 150px;
+  border-radius: 50%;
+  background: url('/static/images/photo.jpeg') no-repeat center;
+  background-size: 15vw 15vw;
+}
