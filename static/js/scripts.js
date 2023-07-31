@@ -5,3 +5,11 @@
 */
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
+
+$('#preview').on('change', function (e) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $(".img--preview").attr('src', e.target.result);
+    }
+    reader.readAsDataURL(e.target.files[0]);
+});
