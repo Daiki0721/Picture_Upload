@@ -28,12 +28,12 @@ def rgb_to_gray(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     return gray
 
-@app.route('/',)
+
+@app.route('/')
 def index():
     return render_template('index.html')
 
-
-@app.route('/upload_file', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -69,7 +69,7 @@ def upload_file():
                 img_path = img_dir + img_name
                 cv2.imwrite(os.path.join(img_dir + img_name), gray)
             #### 保存した画像ファイルのpathをHTMLに渡す
-        return render_template('pred.html', img_path=img_path)
+        return render_template('index.html', img_path=img_path)
 
 
 if __name__ == '__main__':
