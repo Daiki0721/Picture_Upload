@@ -68,8 +68,9 @@ def upload_file():
                 #画像の保存先のパスの指定
                 img_path = img_dir + img_name
                 cv2.imwrite(os.path.join(img_dir + img_name), gray)
+                a = {"test" : "hello world"}
             #### 保存した画像ファイルのpathをHTMLに渡す
-        return render_template('index.html', img_path=img_path)
+        return render_template('index.html', img_path=img_path, test = a["test"])
 
 
 if __name__ == '__main__':
