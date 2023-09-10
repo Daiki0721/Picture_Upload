@@ -2,13 +2,13 @@ import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 # request
 from werkzeug.utils import secure_filename
-# ファイル名をチェック
+# check the name of file
 import cv2
 from datetime import datetime as dt
 
 
 UPLOAD_FOLDER = 'static/uploads/'
-# アップロード先のディレクトリ
+# Upload directory
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__, static_folder = "static")
@@ -19,11 +19,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
 def allowed_file(filename):
-    # .があるかのチェック&拡張子の確認
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-#白黒変換
+#Convert to grayscale function
 def rgb_to_gray(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     return gray
@@ -48,27 +47,26 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            #### 現在時刻を名前として「uploads/」に保存する
+            # Save the uploaded file as name of current time
             dt_now = dt.now().strftime("%Y%m%d%H%M%S%f")
             filename = dt_now + ".jpg"
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-            # 静的ファイルのパス
+            # PATH to static files
             img_dir = "./static/uploads/"
             path = img_dir + filename
-            #画像の読み込み
+            #Import picture date
             img = cv2.imread(path)
-            # 画像データ用配列にデータがあれば
+            # if img has date
             if len(img) != 0:
-                #読み込んだ画像を白黒変換
+                #Convert to grayscale from uploaded picture
                 gray = rgb_to_gray(img)
-                #### 現在時刻を名前として「uploads/」に保存する
+                #### Save the uploaded file as name of current time
                 dt_now = dt.now().strftime("%Y%m%d%H%M%S%f")
                 img_name = "gray" + dt_now + ".jpg"
-                #画像の保存先のパスの指定
+                #PATH to save directory
                 img_path = img_dir + img_name
                 cv2.imwrite(os.path.join(img_dir + img_name), gray)
-            #### 保存した画像ファイルのpathをHTMLに渡す
         return render_template('index.html', img_path=img_path)
 
 
